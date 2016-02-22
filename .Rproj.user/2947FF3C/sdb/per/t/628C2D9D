@@ -1,0 +1,18 @@
+{
+    "contents" : "library(shiny)\nlibrary(FinCal)\n\nRetireEstimate <- function(type, years, current) \n        {\n        if (type == \"Conservative\") {i <- .05}\n        if (type == \"Moderate\") {i <- .07}\n        if (type == \"Aggressive\") {i <- .09}\n        fv(i, years, pv = current * -1000, pmt = 0, type = 0)\n        \n        }\n\nshinyServer(\n        function(input, output) {\n                output$inputtype <- renderPrint({input$itype})\n                output$inputsavings <- renderPrint({input$savings})\n                output$inputyrs <- renderPrint({input$yrs})\n                output$estimate <- renderPrint({RetireEstimate(input$itype, input$yrs,\n                                                               input$savings)})\n        }\n)\n\n# library(shiny)\n# \n# diabetesRisk <- function(glucose) \n#         {glucose / 200}\n# \n# shinyServer(\n#         function(input, output) {\n#                 output$inputValue <- renderPrint({input$glucose})\n#                 output$prediction <- renderPrint({diabetesRisk(input$glucose)})\n#         }\n# )\n",
+    "created" : 1456171080267.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1125150147",
+    "id" : "628C2D9D",
+    "lastKnownWriteTime" : 1456184244,
+    "path" : "~/GitHub/project/retirerich/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
