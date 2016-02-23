@@ -1,0 +1,18 @@
+{
+    "contents" : "library(shiny)\nif (!require(FinCal)) {\n        stop(\"This app requires the FinCal package. To install it, run 'install.packages(\\\"FinCal\\\")'.\\n\")\n}\nif (!require(lubridate)) {\n        stop(\"This app requires the lubridate package. To install it, run 'install.packages(\\\"lubridate\\\")'.\\n\")\n}\n#library(FinCal)\n#library(lubridate)\n\nRetireEstimate <- function(type, years, current)\n{\n        if (type == \"Conservative\") {\n                i <- .05\n        }\n        if (type == \"Moderate\") {\n                i <- .07\n        }\n        if (type == \"Aggressive\") {\n                i <- .09\n        }\n        \n        if (years < 5) {\n                y <- .4\n        }\n        if (years > 4 | years < 10) {\n                y <- .2\n        }\n        if (years > 9) {\n                y <- .1\n        }\n        \n        set.seed(42)\n        norm <- rnorm(456, i, i * y)\n        df <- data.frame(\n                Date = as.Date(character()),\n                Amt = double(),\n                stringsAsFactors = FALSE\n        )\n        m <- years * 12\n        \n        for (k in 1:m) {\n                newrow <-\n                        data.frame(Sys.Date() %m+% months(k), fv(\n                                norm, k/12, pv = current * -1, pmt = 0, type = 0\n                        ))\n                \n                \n                df <- rbind(df,newrow)\n        }\n        colnames(df) <- c(\"Date\", \"Estimated_Savings\")\n        df\n        \n}\n\n\nshinyServer(function(input, output) {\n        output$inputtype <- renderPrint({\n                input$itype\n        })\n        output$inputsavings <- renderPrint({\n                input$savings\n        })\n        output$inputyrs <- renderPrint({\n                input$yrs\n        })\n        output$newplot <- renderPlot({\n                thedata <- RetireEstimate(input$itype, input$yrs, input$savings)\n                colnames(thedata) <- c(\"Date\", \"Estimated_Savings\")\n                plot(thedata, pch = 15, col = \"lightgrey\")\n                abline(lm(thedata$Estimated_Savings~thedata$Date),col = \"red\")\n        })\n        \n        \n})\n",
+    "created" : 1456250092935.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2820096940",
+    "id" : "8E411ED4",
+    "lastKnownWriteTime" : 1456254859,
+    "path" : "~/GitHub/project/retirerich/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
