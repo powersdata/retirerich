@@ -1,0 +1,18 @@
+{
+    "contents" : "Developing Data Products - Peer Assesment Projects\n======================\n\n### Shiny Application\n\n**How to run**\n\nShare as two R files\n\nAnyone with R can run my Shiny app. You will need a copy of my server.R and ui.R files, as well as any supplementary materials used in my app (here:.nojekyll). Place the files into an app directory in your working directory. \n\nYou can launch the app in R with the following commands:\n\n* install.packages(“shiny”)\n* library(shiny)\n* runApp()\n\nOnce the app is running, you do the following:\n\n* Select your investor type\n* Fill in your years to retirement\n* Provide your current savings amount\n\nYou will then hit the \"**Submit**\" button and your retirement savings will be plotted.\n\n### Reproducible Pitch Presentation\n\n**Pitch**\n\nWelcome to Retirement\n\nThis application is based on the estimating and calculating the future value of your savings data.\n\n####What to be a millionaire when you retire?\n\nFind out how by using my app.\n\n",
+    "created" : 1456412580394.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2367605737",
+    "id" : "9E0E21E8",
+    "lastKnownWriteTime" : 1456422511,
+    "path" : "~/GitHub/project/retirerich/Readme.md",
+    "project_path" : "Readme.md",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "markdown"
+}

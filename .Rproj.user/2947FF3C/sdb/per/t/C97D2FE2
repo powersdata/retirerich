@@ -1,0 +1,18 @@
+{
+    "contents" : "library(shiny)\nshinyUI(pageWithSidebar(\n        # Application title\n        headerPanel(\"Estimated Savings at Retirement\"),\n        # Sidebar with controls to select the type of investor\n        # and number of years to retirement\n        # and amount of current savings\n        sidebarPanel(\n                radioButtons(\n                        \"itype\", \"Investor Type:\",\n                        c(\n                                \"Conservative\" = \"Conservative\",\n                                \"Moderate\" = \"Moderate\",\n                                \"Aggressive\" = \"Aggressive\"\n                        )\n                ),\n                numericInput('yrs', 'Years to Retirement', 2, min = 2),\n                numericInput(\n                        'savings', 'Amount of current savings', 1000, min = 1000, step = 1000\n                ),\n                submitButton('Submit')\n        ),\n        mainPanel(tabsetPanel(\n                tabPanel(\n                        \"Plot\",\n                        h3('Predicted Savings'),\n                        h4('Investor Type of'),\n                        verbatimTextOutput(\"inputtype\"),\n                        h4('With Savings of'),\n                        verbatimTextOutput(\"inputsavings\"),\n                        h4('and this many years to retirement'),\n                        verbatimTextOutput(\"inputyrs\"),\n                        h4('Estimated amount at the start of retirement'),\n                        plotOutput(\"newplot\")\n                ),\n                tabPanel(\n                        \"Documentation\",\n                        h3('How to run'),\n                        h4('Share as two R files'),\n                        h4(\n                                'Anyone with R can run my Shiny app. You will need a copy of my server.R and ui.R files, as well as any supplementary materials used in my app (here:.nojekyll). Place the files into an app directory in your working directory.'\n                        ),\n                        h4('You can launch the app in R with the following commands:'),\n                        tags$div(tags$ul(\n                                tags$li(\"install.packages(“shiny”)\"),\n                                tags$li(\"library(shiny)\"),\n                                tags$li(\"runApp()\")\n                        )),\n                        h4('Once the app is running, you do the following:'),\n                        tags$div(tags$ul(\n                                tags$li(\"Select your investor type\"),\n                                tags$li(\"Fill in your years to retirement\"),\n                                tags$li(\"Provide your current savings amount\")\n                        )),\n                        h4(\n                                'You will then hit the \"Submit\" button and your retirement savings will be plotted.'\n                        )\n                )\n        ))\n))",
+    "created" : 1456413721257.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4289958011",
+    "id" : "C97D2FE2",
+    "lastKnownWriteTime" : 1456422455,
+    "path" : "~/GitHub/project/retirerich/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
