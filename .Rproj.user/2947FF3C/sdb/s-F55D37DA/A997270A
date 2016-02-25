@@ -1,0 +1,17 @@
+{
+    "contents" : "Estimated Savings at Retirement\n========================================================\nauthor: Ted Powers\ndate: 2/25/16\n\nHow Much Do You Need at Retirement?\n========================================================\nincremental: true\n\n\n### Do you have a dollar amount in mind?\n\n\n\n## Do you know your current savings?\n\n\nPlay around with the Savings Calculator\n========================================================\n\n\n\nSee what type of investor you need to be!\n\nPerhaps, you will need to put off retirement for a few more years.\n\n\n```{r, echo=FALSE}\n#loads required libraries and creates app function for RetireEstimate App\nif (!require(FinCal)) {\n        stop(\n                \"This app requires the FinCal package. To install it, run 'install.packages(\\\"FinCal\\\")'.\\n\"\n        )\n}\nif (!require(lubridate)) {\n        stop(\n                \"This app requires the lubridate package. To install it, run 'install.packages(\\\"lubridate\\\")'.\\n\"\n        )\n}\nRetireEstimate <- function(type, years, current)\n{\n        if (type == \"Conservative\") {\n                i <- .05\n        }\n        if (type == \"Moderate\") {\n                i <- .07\n        }\n        if (type == \"Aggressive\") {\n                i <- .09\n        }\n        set.seed(42)\n        df <- data.frame(\n                Date = as.Date(character()),\n                Amt = double(),\n                stringsAsFactors = FALSE\n        )\n        y <- 0\n        m <- years * 12\n        k <- 1\n        for (k in 1:m) {\n                set.seed(42)\n                if (k < 61) {\n                        y <- .5 / 60\n                        f <- .75\n                }\n                if (k > 60 & k < 121) {\n                        y <- .15 / 60\n                        f <- .4\n                }\n                if (k > 120) {\n                        y <- .000000000001\n                        f <- .1\n                }\n                norm <- rnorm(456, i, i * (f - (k * y)))\n                newrow <-\n                        data.frame(\n                                Sys.Date() %m+% months(k), fv(\n                                        norm, k / 12, pv = current * -1, pmt = 0, type = 0\n                                )\n                        )\n                df <- rbind(df,newrow)\n        }\n        colnames(df) <- c(\"Date\", \"Estimated_Savings\")\n        df\n}\n```\n\nFind Out with this App\n========================================================\n\nhttps://powersdata.shinyapps.io/retirerich/\n\n```{r, echo=FALSE}\nthedata <- RetireEstimate(\"Conservative\", 3, 3000)\n                colnames(thedata) <- c(\"Date\", \"Estimated_Savings\")\n                plot(thedata, pch = 15, col = \"lightgrey\")\n                abline(lm(thedata$Estimated_Savings ~ thedata$Date),col = \"red\")\n```\n",
+    "created" : 1456433569279.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1195654007",
+    "id" : "A997270A",
+    "lastKnownWriteTime" : 1456437143,
+    "path" : "~/GitHub/project/retirerich/retirerich.Rpres",
+    "project_path" : "retirerich.Rpres",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_presentation"
+}
